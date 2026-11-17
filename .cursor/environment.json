@@ -1,0 +1,4 @@
+{
+  "install": "yarn install",
+  "start": "cd /workspace && exec yarn start"
+}

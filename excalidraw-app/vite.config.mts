@@ -146,8 +146,11 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       port: Number(envVars.VITE_APP_PORT || 3000),
-      // open the browser
-      open: true,
+      // Default Vite/Node can listen on ::1 only; port forwarding targets 127.0.0.1.
+      host: process.env.CURSOR_AGENT ? "0.0.0.0" : "127.0.0.1",
+      strictPort: true,
+      // open the browser (not on headless cloud agents)
+      open: !process.env.CURSOR_AGENT,
     },
     // We need to specify the envDir since now there are no
     //more located in parallel with the vite.config.ts file but in parent dir
